@@ -1,0 +1,132 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Segments/Level1/Segment2_level1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Levels/Level1.gd" type="Script" id=2]
+[ext_resource path="res://Segments/Level1/Segment1_level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Segments/Level1/Segment3_level1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scripts/UI/LevelUI.gd" type="Script" id=5]
+[ext_resource path="res://GFX/Player/main_car.png" type="Texture" id=6]
+[ext_resource path="res://GFX/Env/finishline.png" type="Texture" id=7]
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://GFX/UI/fuel.png" type="Texture" id=9]
+[ext_resource path="res://GFX/UI/speed.png" type="Texture" id=10]
+[ext_resource path="res://Segments/Level1/Segment6_level1.tscn" type="PackedScene" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 13
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 29
+font_data = ExtResource( 8 )
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 2 )
+startSegments = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
+middleSegments = [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ]
+middleSegmentsChances = [ [ 100, 20, 0 ], [ 0, 0, 100 ], [ 100, 0, 0 ] ]
+endSegments = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 3 ) ]
+break_rate = 7
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="LevelUI" type="Control" parent="CanvasLayer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProgressRect" type="ColorRect" parent="CanvasLayer/LevelUI"]
+margin_right = 40.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinishLine" type="Sprite" parent="CanvasLayer/LevelUI/ProgressRect"]
+position = Vector2( 20, 10 )
+scale = Vector2( 0.134, 0.13 )
+texture = ExtResource( 7 )
+
+[node name="ProgressSprite" type="Sprite" parent="CanvasLayer/LevelUI/ProgressRect"]
+position = Vector2( 19.5281, 585.899 )
+scale = Vector2( 0.412228, 0.375358 )
+texture = ExtResource( 6 )
+
+[node name="StatsRect" type="ColorRect" parent="CanvasLayer/LevelUI"]
+margin_left = 868.0
+margin_right = 1025.0
+margin_bottom = 73.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="speed" type="Sprite" parent="CanvasLayer/LevelUI/StatsRect"]
+position = Vector2( 18.5176, 52.0924 )
+scale = Vector2( 0.0588643, 0.0567797 )
+texture = ExtResource( 10 )
+
+[node name="SpeedLabel" type="Label" parent="CanvasLayer/LevelUI/StatsRect"]
+margin_left = 44.1911
+margin_top = 40.7013
+margin_right = 144.191
+margin_bottom = 66.7013
+rect_pivot_offset = Vector2( -272.572, -29.3895 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+text = "0km/h"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="fuel" type="Sprite" parent="CanvasLayer/LevelUI/StatsRect"]
+position = Vector2( 21.9824, 18.4829 )
+scale = Vector2( 0.0588643, 0.0567797 )
+texture = ExtResource( 9 )
+
+[node name="FuelLabel" type="Label" parent="CanvasLayer/LevelUI/StatsRect"]
+margin_left = 52.2963
+margin_top = 7.00226
+margin_right = 132.296
+margin_bottom = 33.0023
+rect_pivot_offset = Vector2( -272.572, -29.3895 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 10
+text = "100%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinishMsg" type="Label" parent="CanvasLayer/LevelUI"]
+margin_left = 417.082
+margin_top = 110.592
+margin_right = 649.082
+margin_bottom = 139.592
+custom_fonts/font = SubResource( 3 )
+text = "YOU WON!"
+
+[node name="GameResetTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="GameResetTimer" to="." method="reset_game"]
