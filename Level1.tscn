@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Segments/Level1/Segment2_level1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Levels/Level1.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://GFX/UI/fuel.png" type="Texture" id=9]
 [ext_resource path="res://GFX/UI/speed.png" type="Texture" id=10]
 [ext_resource path="res://Segments/Level1/Segment6_level1.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Segments/Level1/Segment4_level1.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=1]
 size = 13
@@ -28,8 +29,8 @@ font_data = ExtResource( 8 )
 [node name="Level1" type="Node2D"]
 script = ExtResource( 2 )
 startSegments = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 3 ) ]
-middleSegments = [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ) ]
-middleSegmentsChances = [ [ 100, 20, 0 ], [ 0, 0, 100 ], [ 100, 0, 0 ] ]
+middleSegments = [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 4 ), ExtResource( 12 ) ]
+middleSegmentsChances = [ [ 100, 20, 0, 0 ], [ 0, 0, 100, 0 ], [ 0, 0, 80, 40 ], [ 100, 5, 0, 0 ] ]
 endSegments = [ ExtResource( 3 ), ExtResource( 3 ), ExtResource( 11 ), ExtResource( 3 ) ]
 break_rate = 7
 

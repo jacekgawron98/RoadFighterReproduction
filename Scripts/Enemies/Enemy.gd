@@ -17,10 +17,10 @@ func _process(delta):
 			move_and_slide(Vector2(0,-600))
 		#position.y += velocity
 		move_and_slide(Vector2(0,velocity + 6))
-		if(global_position.y >= -500 && !has_started):
+		if(global_position.y >= 0 && !has_started):
 			has_started = true
 		
-		if((has_started && global_position.y <= -1000) || global_position.y >= 1000):
+		if((has_started && global_position.y <= -100) || global_position.y >= 1000):
 			$Area2D.monitoring = false
 			$CollisionShape2D.disabled = true
 			set_process(false)
@@ -39,7 +39,6 @@ func _on_Area2D_body_entered(body):
 			hide()
 			return
 		if(is_truck):
-			print("col")
 			body.destroy()
 		else:
 			body.slide(global_position)

@@ -116,5 +116,4 @@ func on_game_finished():
 	$GameResetTimer.start()
 	
 func reset_game():
-	print("timeout")
 	get_tree().change_scene("res://MainMenu.tscn")

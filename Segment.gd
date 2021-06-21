@@ -5,6 +5,7 @@ export var max_enemies = 0
 export (Array, PackedScene) var enemies = []
 export (Array, PackedScene) var next_segments = []
 export (Array, int) var next_segments_chance = []
+export var middle_offset = 0
 
 var instanced_enemies = []
 var rng
@@ -60,3 +61,8 @@ func _on_FinishLine_body_entered(body):
 func _on_LeftArea2D_body_entered(body):
 	if(body.is_in_group("player")):
 		body.destroy()
+
+
+func _on_newMiddle_body_entered(body):
+	if(body.is_in_group("player")):
+		body.change_middle(middle_offset)

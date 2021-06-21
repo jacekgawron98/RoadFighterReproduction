@@ -1,18 +1,21 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://GFX/Env/segment5_level1.png" type="Texture" id=1]
 [ext_resource path="res://Segment.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/segment5_level1.png-db80d9671c9c2b86831a5da1d38298e5.stex"
+
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32.0785, 293.913 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 146.865, 288.968 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 10, 297.185 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 144.877, 294.883 )
 
 [node name="Segment" type="Node2D"]
@@ -20,31 +23,31 @@ script = ExtResource( 2 )
 nam = "seg5"
 
 [node name="SegmentSprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = SubResource( 1 )
 
 [node name="RIghtEdge" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RIghtEdge"]
 position = Vector2( 226.572, 1.09842 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="RIghtEdge"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RIghtEdge/Area2D"]
 position = Vector2( 339.429, -6.1333 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="LeftEdge" type="StaticBody2D" parent="."]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftEdge"]
 position = Vector2( -221.179, -0.744506 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="LeftEdge"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftEdge/Area2D"]
 position = Vector2( -352.365, -1.27356 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [connection signal="area_entered" from="RIghtEdge" to="." method="_on_RIghtEdge_area_entered"]

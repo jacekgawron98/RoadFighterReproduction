@@ -13,7 +13,11 @@ var destroy_delay = 2
 var cur_destroy_delay = 0
 
 var slide = 0
+export var slide_max_time = 2
+var cur_slide_time = 0
 var critical_slide = false;
+
+var restart_middle
 
 signal finished
 signal fuel_get
@@ -21,6 +25,7 @@ signal fuel_get
 func _ready():
 	cur_slide_rate = slide_rate
 	screen_size = get_viewport_rect().size
+	restart_middle = screen_size.x/2
 
 func _physics_process(delta):
 	var velocity = Vector2()
@@ -40,24 +45,23 @@ func _physics_process(delta):
 		if(!is_destroyed && !has_finished):
 			velocity.x = cur_slide_rate * slide
 			position += velocity * delta
+			cur_slide_time += delta
+			if(cur_slide_time >= slide_max_time):
+				cur_slide_rate = slide_rate * 3
+				critical_slide = true
 			if(!critical_slide):
-				if(Input.is_action_pressed("ui_right")):
-					if(slide == -1):
-						slide = 0
-					elif(slide == 1):
-						cur_slide_rate *= 3
-						critical_slide = true
-				if(Input.is_action_pressed("ui_left")):
-					if(slide == -1):
-						cur_slide_rate *= 3
-						critical_slide = true
-					elif(slide == 1):
-						slide = 0
+				if(Input.is_action_pressed("ui_right") && slide == 1):
+					slide = 0
+					cur_slide_rate = slide_rate
+					cur_slide_time = 0
+				if(Input.is_action_pressed("ui_left") && slide == -1):
+					slide = 0
+					cur_slide_rate = slide_rate
+					cur_slide_time = 0
 		else:
 			reset(delta)
 
 func slide(enemy_position):
-	print(String(enemy_position.x) + " " + String(position.x))
 	if(enemy_position.x <= position.x):
 		slide = 1
 	else:
@@ -80,8 +84,11 @@ func reset(delta):
 		$AnimatedSprite.animation = "default"
 		is_destroyed = false
 		if(!has_finished):
-			position.x = screen_size.x/2
+			position.x = restart_middle
 
 func finished():
 	has_finished = true
 	emit_signal("finished")
+
+func change_middle(middle):
+	restart_middle = screen_size.x/2 +  middle

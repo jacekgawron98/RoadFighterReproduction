@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/segment5_level1.png-db80d9671c9c2b86831a5da1d38298e5.stex"
+path="res://.import/road_side2.png-3b27765cb5e29d3398e70e42a723dad2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://GFX/Env/segment5_level1.png"
-dest_files=[ "res://.import/segment5_level1.png-db80d9671c9c2b86831a5da1d38298e5.stex" ]
+source_file="res://GFX/Env/road_side2.png"
+dest_files=[ "res://.import/road_side2.png-3b27765cb5e29d3398e70e42a723dad2.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
